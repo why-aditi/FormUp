@@ -25,7 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from 'react-hook-form';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/components/hooks/use-toast"
 import { formSchema, formSchemaType } from '@/schemas/form';
 import { CreateForm } from '@/actions/form'; 
 import { useRouter } from 'next/navigation';
