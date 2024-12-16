@@ -40,7 +40,7 @@ export const TextFieldFormElement:FormElement = {
         label: "Text Field"
     },
     designerComponent: DesignerComponent,
-    formComponent: () => FormComponent,
+    formComponent: FormComponent,
     propertiesComponent: PropertiesComponent
 }
 
