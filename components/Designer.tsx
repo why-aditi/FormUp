@@ -11,7 +11,7 @@ import { Button } from './ui/button';
 import { BiSolidTrash } from 'react-icons/bi';
 
 export default function Designer() {
-  const { elements, addElement } = useDesigner();
+  const { elements, addElement, selectedElement, setSelectedElement } = useDesigner();
   const droppable = useDroppable({
     id: "designer-drop-area",
     data: {
@@ -42,7 +42,9 @@ export default function Designer() {
 
   return (
     <div className="flex w-full h-full">
-      <div className="p-4 w-full">
+      <div className="p-4 w-full" onClick={()=>{
+        if(selectedElement) setSelectedElement(null)
+      }}>
         <div
           ref={droppable.setNodeRef}
           className={cn(
@@ -55,7 +57,7 @@ export default function Designer() {
               Drop Here
             </p>
           )}
-          {droppable.isOver && (
+          {droppable.isOver && elements.length == 0 && (
             <div className="p-4 w-full">
               <div className="rounded-md h-[120px] bg-primary/20"></div>
             </div>
@@ -76,7 +78,7 @@ export default function Designer() {
 
 function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
-  const { removeElement } = useDesigner();
+  const { removeElement, selectedElement, setSelectedElement } = useDesigner();
   
   const topHalf = useDroppable({
     id: element.id + "-top",
@@ -104,6 +106,8 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       isDesignerElement: true,
     },
   });
+  
+  if(draggable.isDragging) return null
 
   const DesignerElement = FormElements[element.type]?.designerComponent;
 
@@ -124,6 +128,10 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
       onMouseLeave={() => {
         setMouseIsOver(false);
       }}
+      onClick={(e) =>{
+        e.stopPropagation()
+        setSelectedElement(element)
+      }}
     >
       <div ref={topHalf.setNodeRef} className="absolute w-full h-1/2 rounded-t-md" />
       <div ref={bottomHalf.setNodeRef} className="absolute w-full bottom-0 h-1/2 rounded-b-md" />
@@ -133,7 +141,8 @@ function DesignerElementWrapper({ element }: { element: FormElementInstance }) {
             <Button
               className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
               variant={'outline'}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation()
                 removeElement(element.id);
               }}
             >
