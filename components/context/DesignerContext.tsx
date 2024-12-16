@@ -12,6 +12,8 @@ type DesignerContextType = {
   setSelectedElement: Dispatch<SetStateAction<FormElementInstance | null>>
 
   updateElement: (id: string, element: FormElementInstance) => void
+
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>
 };
 
 export const DesignerContext = createContext<DesignerContextType | null>(null);
@@ -41,7 +43,7 @@ export default function DesignerContextProvider({ children }: { children: ReactN
   }
 
   return (
-    <DesignerContext.Provider value={{ elements, addElement, removeElement, selectedElement, setSelectedElement, updateElement }}>
+    <DesignerContext.Provider value={{ elements, addElement, removeElement, selectedElement, setSelectedElement, updateElement, setElements }}>
       {children}
     </DesignerContext.Provider>
   );
