@@ -86,7 +86,7 @@ function StatsCard({ data, loading }: StatsCardProps) {
   );
 }
 
-function StatsCards({
+export function StatsCards({
   title,
   value,
   icon,
