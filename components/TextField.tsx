@@ -1,13 +1,13 @@
 "use client"
 
 import { MdTextFields } from "react-icons/md"
-import { ElementsType, FormElement, FormElementInstance } from "./FormElements"
+import { ElementsType, FormElement, FormElementInstance, SubmitFunction } from "./FormElements"
 import { Label } from "./ui/label"
 import { Input } from "./ui/input"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import useDesigner from "./hooks/useDesigner"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
 import { Switch } from "./ui/switch"
@@ -178,9 +178,10 @@ function DesignerComponent({ elementInstance }: { elementInstance: FormElementIn
     );
   }
 
-function FormComponent({ elementInstance }: { elementInstance: FormElementInstance }) {
+function FormComponent({ elementInstance, submitValue }: { elementInstance: FormElementInstance; submitValue?: SubmitFunction }) {
     const element = elementInstance as CustomInstance;
     const { label, required, placeholder, helperText } = element.extraAttributes;
+    const [value, setValue] = useState("")
   
     return (
       <div className="flex flex-col gap-0.5 w-full"> 
@@ -188,7 +189,16 @@ function FormComponent({ elementInstance }: { elementInstance: FormElementInstan
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </Label>
-        <Input placeholder={placeholder} className="mb-1" /> 
+        <Input 
+            placeholder={placeholder} 
+            className="mb-1" 
+            onChange={e => setValue(e.target.value)} 
+            onBlur={(e) => {
+                if(!submitValue) return
+                submitValue(element.id, e.target.value)
+            }}
+            value={value}
+        /> 
         {helperText && (
           <p className="text-muted-foreground text-[0.8rem] mt-1"> 
             {helperText}
