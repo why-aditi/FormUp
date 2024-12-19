@@ -10,11 +10,12 @@ export default function VisitBtn({shareUrl}:{shareUrl: string}) {
     },[])
     if(!mounted) return null
     const shareLink = `${window.location.origin}/submit/${shareUrl}`
+    console.log(shareLink)
   return (
     <Button 
         className='w-[200px]'
         onClick={() =>{
-            window.open(shareLink + "_blank")
+            window.open(shareLink)
         }}
     >
         Visit    
