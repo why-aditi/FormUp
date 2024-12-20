@@ -66,6 +66,7 @@ function FormSubmitComponent({
                     <h1 className="text-2xl font-bold">
                         Form Submitted
                     </h1>
+                    <p className="text-muted-foreground">Thank you for submitting the form, you can close the page now</p>
                 </div>
             </div>
         )
