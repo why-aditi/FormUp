@@ -2,7 +2,6 @@
 
 import { ElementsType, FormElement, FormElementInstance } from "../FormElements"
 import { Label } from "../ui/label"
-import { Input } from "../ui/input"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

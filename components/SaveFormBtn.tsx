@@ -19,6 +19,7 @@ export default function SaveFormBtn({id}: {id:number}) {
         description: "Your form has been saved"
       })
     } catch (error) {
+      console.log(error)
       toast({
         title: "Error", 
         description: "something went wrong",

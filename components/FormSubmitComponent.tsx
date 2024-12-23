@@ -49,6 +49,7 @@ function FormSubmitComponent({
             await SubmitForm(formUrl, jsonContent)
             setSubmitted(true)
         } catch (error) {
+            console.log(error)
             toast({
                 title: "Error",
                 description: "Something went wrong",
