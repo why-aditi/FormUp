@@ -19,7 +19,7 @@ import Confetti from "react-confetti"
 
 export default function FormBuilder({ form }: { form: Form }) {
     const [isReady, setIsReady] = useState(false)
-    const {setElements} = useDesigner()
+    const {setElements, setSelectedElement} = useDesigner()
     const mouseSensor = useSensor(MouseSensor, {
         activationConstraint: {
             distance: 10,
@@ -39,6 +39,7 @@ export default function FormBuilder({ form }: { form: Form }) {
         if(isReady) return
         const elements = JSON.parse(form.content);
         setElements(elements);
+        setSelectedElement(null)
         const readyTimeout = setTimeout(() => {
             console.log("Setting isReady to true");
             setIsReady(true);
@@ -47,7 +48,7 @@ export default function FormBuilder({ form }: { form: Form }) {
             console.log("Clearing readyTimeout");
             clearTimeout(readyTimeout);
         };
-    }, [form, setElements, isReady]);
+    }, [form, setElements, isReady, setSelectedElement]);
     
 
     if(!isReady){
