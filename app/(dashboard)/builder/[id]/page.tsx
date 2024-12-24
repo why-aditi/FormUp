@@ -3,15 +3,13 @@ import FormBuilder from '@/components/FormBuilder';
 import React from 'react';
 
 interface BuilderPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>; // Update type to reflect a Promise
 }
 
 async function BuilderPage({ params }: BuilderPageProps) {
-  const { id } = params;
-  const form = await GetFormById(Number(id)); 
-  
+  const { id } = await params; // Await params before destructuring
+  const form = await GetFormById(Number(id)); // Convert id to a number if necessary
+
   if (!form) {
     throw new Error("Form not found");
   }
