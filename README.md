@@ -48,11 +48,3 @@ FormUp is a dynamic and easy-to-use form builder application that allows users t
 3. Customize field properties and validation rules.
 4. Save and share your form.
 5. Collect responses and analyze the data.
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-For any issues or feature requests, feel free to reach out via [GitHub Issues](https://github.com/yourusername/formup/issues).
